@@ -1,0 +1,145 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "Employee Management System",
+    "description" : "Creating API's related to Employee.....",
+    "contact" : {
+      "name" : "Smith",
+      "url" : "smith.com",
+      "email" : "smith@123.gmail.com"
+    },
+    "termsOfService" : "terms",
+    "license" : {
+      "name" : "MIT",
+      "url" : "https://licence.com"
+    }
+  },
+  "tags" : [ {
+    "name" : "Employee",
+    "description" : "Employee related API"
+  } ],
+  "paths" : {
+    "/employee" : {
+      "post" : {
+        "summary" : "Save Employee",
+        "tags" : [ "Employee" ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        },
+        "operationId" : "saveEmployee",
+        "description" : "This is used to save an employee object into the DB",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            },
+            "application/xml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          }
+        }
+      },
+      "get" : {
+        "summary" : "GetAllEmployees",
+        "tags" : [ "Employee" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId" : "get-employee"
+      }
+    },
+    "/employee/{empId}" : {
+      "parameters" : [ {
+        "schema" : {
+          "type" : "number"
+        },
+        "name" : "empId",
+        "in" : "path",
+        "required" : true,
+        "description" : "Id of the employee"
+      } ],
+      "get" : {
+        "summary" : "GetEmployeeByID",
+        "tags" : [ "Employee" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            },
+            "headers" : { }
+          }
+        },
+        "operationId" : "get-employee-empId",
+        "description" : ""
+      },
+      "x-tag" : "Employee"
+    }
+  },
+  "servers" : [ {
+    "url" : "https://dev.foo.com",
+    "description" : "Dev server"
+  }, {
+    "url" : "https://test.foo.com",
+    "description" : "Test Server"
+  } ],
+  "components" : {
+    "securitySchemes" : { },
+    "schemas" : {
+      "Employee" : {
+        "title" : "Employee",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "example" : 101
+          },
+          "name" : {
+            "type" : "string",
+            "x-stoplight" : {
+              "id" : "umh57gj2bwkyz"
+            },
+            "example" : "smith"
+          },
+          "salary" : {
+            "type" : "number",
+            "x-stoplight" : {
+              "id" : "c9xmo7b8d0oxs"
+            },
+            "example" : "55000.987"
+          }
+        }
+      }
+    }
+  }
+}
